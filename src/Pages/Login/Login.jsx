@@ -1,11 +1,12 @@
 import { useContext } from "react";
 import { useForm } from "react-hook-form";
+import { FcGoogle } from "react-icons/fc";
 import { Link, useNavigate } from "react-router-dom";
 import Swal from "sweetalert2";
 import { UserContext } from "../../AuthContext/AuthContext";
 
 const Login = () => {
-  const { signInUser, error, setError } = useContext(UserContext);
+  const { signInUser, error, setError, googleSignIn } = useContext(UserContext);
   const navigate = useNavigate();
 
   const {
@@ -31,6 +32,19 @@ const Login = () => {
         navigate("/");
       })
       .catch((error) => setError(error.message));
+  };
+
+  const handleGoogleSignIn = () => {
+    googleSignIn().then((data) => {
+      Swal.fire({
+        position: "top-end",
+        icon: "success",
+        title: "User login successfully",
+        showConfirmButton: false,
+        timer: 1500,
+      });
+      navigate("/");
+    });
   };
 
   return (
@@ -104,6 +118,16 @@ const Login = () => {
                   </Link>
                 </p>
               </label>
+              <div className="divider">OR</div>
+              <div>
+                <button
+                  onClick={handleGoogleSignIn}
+                  className="btn outline w-full bg-transparent outline-[#ff0000] "
+                >
+                  <FcGoogle className="text-2xl"></FcGoogle>
+                  Continue With Google
+                </button>
+              </div>
             </div>
           </div>
         </div>
