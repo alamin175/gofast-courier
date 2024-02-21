@@ -1,50 +1,55 @@
+import { useQuery } from "@tanstack/react-query";
 import { useContext } from "react";
-import { useForm } from "react-hook-form";
+import { set, useForm } from "react-hook-form";
 import { FcGoogle } from "react-icons/fc";
 import { Link, useNavigate } from "react-router-dom";
 import Swal from "sweetalert2";
 import { UserContext } from "../../AuthContext/AuthContext";
+import SocialLogin from "../../components/SocialLogin/SocialLogin";
+import useAxiosPublic from "../../Hooks/useAxiosPublic";
 
 const Register = () => {
+  const axiosPublic = useAxiosPublic();
   const { createUser, error, setError, googleSignIn } = useContext(UserContext);
   const navigate = useNavigate();
 
   const {
     register,
     handleSubmit,
+    reset,
     formState: { errors },
   } = useForm();
-
-  const onSubmit = (value) => {
-    const { email, password } = value;
-
+  // const role = watch("role");
+  // console.log(role);
+  const onSubmit = async (value) => {
+    const { role, name, email, password } = value;
+    const userData = {
+      name: name,
+      email: email,
+      role: role,
+    };
     createUser(email, password)
-      .then((data) => {
-        console.log(data);
+      .then(async (data) => {
+        console.log(data.user);
+        const res = await axiosPublic.post("/user", userData);
+        if (res.data.insertedId) {
+          reset();
+          Swal.fire({
+            position: "top-end",
+            icon: "success",
+            title: "User Created Successfullly",
+            showConfirmButton: false,
+            timer: 1500,
+          });
+          navigate("/");
+        }
+        console.log(res);
         setError("");
-        Swal.fire({
-          position: "top-end",
-          icon: "success",
-          title: "User Created Successfully",
-          showConfirmButton: false,
-          timer: 1500,
-        });
-        navigate("/");
       })
-      .catch((error) => setError(error.message));
-  };
-
-  const handleGoogleSignIn = () => {
-    googleSignIn().then((data) => {
-      Swal.fire({
-        position: "top-end",
-        icon: "success",
-        title: "User login successfully",
-        showConfirmButton: false,
-        timer: 1500,
+      .catch((error) => {
+        console.log(error.message);
+        setError(error.message);
       });
-      navigate("/");
-    });
   };
 
   return (
@@ -62,6 +67,27 @@ const Register = () => {
           {/* <h1 className="text-5xl font-bold">Login now!</h1> */}
           <div className="card shrink-0 w-full max-w-sm shadow-2xl bg-base-100">
             <div className="card-body">
+              <div className="form-control">
+                <label className="label">
+                  <span className="label-text text-2xl">Register As</span>
+                </label>
+                <select
+                  defaultValue="default"
+                  {...register("role", { required: "Role is required" })}
+                  className="select focus:outline-red-600 border-red-600 focus:border-red-600 w-full max-w-xs"
+                >
+                  <option value="default" disabled>
+                    Select A Role
+                  </option>
+                  <option value="merchant"> Merchant</option>
+                  <option value="deliveryMan">Delivery Man</option>
+                </select>
+                {errors.role && (
+                  <span className="text-error text-sm">
+                    {errors.role.message}
+                  </span>
+                )}
+              </div>
               <div className="form-control">
                 <label className="label">
                   <span className="label-text">Name</span>
@@ -129,16 +155,7 @@ const Register = () => {
                   </Link>
                 </p>
               </label>
-              <div className="divider">OR</div>
-              <div>
-                <button
-                  onClick={handleGoogleSignIn}
-                  className="btn outline w-full bg-transparent outline-[#ff0000] "
-                >
-                  <FcGoogle className="text-2xl"></FcGoogle>
-                  Continue With Google
-                </button>
-              </div>
+              <SocialLogin></SocialLogin>
             </div>
           </div>
         </div>

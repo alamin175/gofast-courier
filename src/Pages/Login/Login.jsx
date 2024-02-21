@@ -4,6 +4,7 @@ import { FcGoogle } from "react-icons/fc";
 import { Link, useNavigate } from "react-router-dom";
 import Swal from "sweetalert2";
 import { UserContext } from "../../AuthContext/AuthContext";
+import SocialLogin from "../../components/SocialLogin/SocialLogin";
 
 const Login = () => {
   const { signInUser, error, setError, googleSignIn } = useContext(UserContext);
@@ -118,16 +119,7 @@ const Login = () => {
                   </Link>
                 </p>
               </label>
-              <div className="divider">OR</div>
-              <div>
-                <button
-                  onClick={handleGoogleSignIn}
-                  className="btn outline w-full bg-transparent outline-[#ff0000] "
-                >
-                  <FcGoogle className="text-2xl"></FcGoogle>
-                  Continue With Google
-                </button>
-              </div>
+              <SocialLogin></SocialLogin>
             </div>
           </div>
         </div>
