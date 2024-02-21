@@ -10,7 +10,8 @@ import useAxiosPublic from "../../Hooks/useAxiosPublic";
 
 const Register = () => {
   const axiosPublic = useAxiosPublic();
-  const { createUser, error, setError, googleSignIn } = useContext(UserContext);
+  const { createUser, error, setError, updateUserProfile } =
+    useContext(UserContext);
   const navigate = useNavigate();
 
   const {
@@ -21,7 +22,7 @@ const Register = () => {
   } = useForm();
   // const role = watch("role");
   // console.log(role);
-  const onSubmit = async (value) => {
+  const onSubmit = (value) => {
     const { role, name, email, password } = value;
     const userData = {
       name: name,
@@ -29,25 +30,31 @@ const Register = () => {
       role: role,
     };
     createUser(email, password)
-      .then(async (data) => {
+      .then((data) => {
         console.log(data.user);
-        const res = await axiosPublic.post("/user", userData);
-        if (res.data.insertedId) {
-          reset();
-          Swal.fire({
-            position: "top-end",
-            icon: "success",
-            title: "User Created Successfullly",
-            showConfirmButton: false,
-            timer: 1500,
+        updateUserProfile(name, null)
+          .then(async () => {
+            const res = await axiosPublic.post("/user", userData);
+            if (res.data.insertedId) {
+              reset();
+              Swal.fire({
+                position: "top-end",
+                icon: "success",
+                title: "User Created Successfullly",
+                showConfirmButton: false,
+                timer: 1500,
+              });
+              navigate("/");
+            }
+            console.log(res);
+            setError("");
+          })
+          .catch((error) => {
+            console.log(error.message);
+            setError(error.message);
           });
-          navigate("/");
-        }
-        console.log(res);
-        setError("");
       })
       .catch((error) => {
-        console.log(error.message);
         setError(error.message);
       });
   };

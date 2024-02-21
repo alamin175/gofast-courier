@@ -11,14 +11,14 @@ const SocialLogin = () => {
   const navigate = useNavigate();
   const handleGoogleSignIn = () => {
     googleSignIn().then(async (result) => {
-      console.log(result);
+      // console.log(result);
       const userData = {
         name: result.user.displayName,
         email: result.user.email,
         role: "merchant",
       };
       const res = await axiosPublic.post("/user", userData);
-      if (res.data.insertedId) {
+      if (res.data) {
         Swal.fire({
           position: "top-end",
           icon: "success",

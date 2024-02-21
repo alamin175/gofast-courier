@@ -5,6 +5,7 @@ import { UserContext } from "../../../AuthContext/AuthContext";
 
 const Navbar = () => {
   const { user, logOut } = useContext(UserContext);
+
   const handleLogout = () => {
     logOut().then(() => {
       // user logout
@@ -12,13 +13,13 @@ const Navbar = () => {
   };
   const navOption = (
     <>
-      <li>
-        <a>Home</a>
-      </li>
+      <Link to="/">
+        <li className="mr-5">Home</li>
+      </Link>
 
-      <li>
-        <a>Dashboard</a>
-      </li>
+      <Link to="/dashboard/myProfile">
+        <li>Dashboard</li>
+      </Link>
     </>
   );
   return (
@@ -78,19 +79,22 @@ const Navbar = () => {
 
                 <ul
                   tabIndex={0}
-                  className="menu menu-sm dropdown-content mt-3 z-[1] outline outline-[#ff0000] p-2 shadow bg-base-100 rounded-box w-52"
+                  className="menu menu-sm dropdown-content mt-3 z-[1] outline outline-[#ff0000] p-2 shadow bg-base-100 rounded-box w-52 lg:w-64"
                 >
+                  <li className="read-only pointer-events-none ">
+                    <h4 className="text-xl">Name: {user.displayName}</h4>
+                  </li>
+
+                  <li className="read-only pointer-events-none">
+                    <a>Email: {user.email}</a>
+                  </li>
                   <li>
-                    <a className="justify-between">
-                      Profile
-                      <span className="badge">New</span>
+                    <a
+                      className="btn m-2 w-1/2 mx-auto bg-[#ff0000] text-white font-semibold hover:bg-red-600"
+                      onClick={handleLogout}
+                    >
+                      Logout
                     </a>
-                  </li>
-                  <li>
-                    <a>Settings</a>
-                  </li>
-                  <li>
-                    <a onClick={handleLogout}>Logout</a>
                   </li>
                 </ul>
               </>
