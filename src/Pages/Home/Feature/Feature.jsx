@@ -9,7 +9,11 @@ const Feature = () => {
             Our Special Feature{" "}
           </h1>
         </div> */}
-        <SectionTitle title="Our Special Feature"></SectionTitle>
+        <div className="flex justify-center">
+          <h1 className="text-3xl md:text-5xl my-14 md:my-24 font-bold border-b-4 text-white border-white p-5 inline-block ">
+            Our Special Feature
+          </h1>
+        </div>
         <div className="grid md:mx-16 lg:mx-0 m-2 gap-y-5 md:gap-y-10  place-items-center lg:grid-cols-3">
           <div className="card  lg:w-96 bg-base-100 shadow-xl">
             <figure>
@@ -61,7 +65,11 @@ const Feature = () => {
         </div>
         <div>
           <div className="md:-mb-14">
-            <SectionTitle title="Activities On Our Website"></SectionTitle>
+            <div className="flex justify-center">
+              <h1 className="text-3xl md:text-5xl my-14 md:my-24 font-bold border-b-4 text-white border-white p-5 inline-block ">
+                Activities On Our Website
+              </h1>
+            </div>
           </div>
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-10 pt-4 md:pt-10 p-10">
             <div className="p-5 bg-white rounded-lg text-center">

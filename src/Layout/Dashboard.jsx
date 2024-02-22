@@ -11,6 +11,7 @@ const Dashboard = () => {
       <input id="my-drawer" type="checkbox" className="drawer-toggle" />
       <div className="drawer-content flex justify-center">
         {/* Page content here */}
+
         <Outlet></Outlet>
         <label
           htmlFor="my-drawer"
@@ -26,7 +27,7 @@ const Dashboard = () => {
           aria-label="close sidebar"
           className="drawer-overlay"
         ></label>
-        <ul className="menu p-4 w-80 min-h-full bg-[#1e1b3b] text-base-content">
+        <ul className="menu p-4 w-80 min-h-full bg-red-300 text-base-content ">
           {/* Sidebar content here */}
           {admin ? (
             <>
@@ -45,7 +46,7 @@ const Dashboard = () => {
               </li>
             </>
           ) : (
-            <div className="text-2xl text-white">
+            <div className="text-2xl">
               <li>
                 <NavLink
                   activeclassname="active-link"
