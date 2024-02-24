@@ -26,7 +26,7 @@ const ParcelBook = () => {
 
   const onSubmit = async (value) => {
     const {
-      name,
+      collection,
       email,
       parcelType,
       weight,
@@ -37,12 +37,12 @@ const ParcelBook = () => {
     } = value;
     console.log(value);
     const parcelDetails = {
-      name: name,
       email: email,
       parcelType: parcelType,
       parcelWeight: weight,
       receiverName: receiverName,
       receiverNumber: number,
+      collectionAmount: collection,
       receiverAddress: address,
       parcelCost: parcelCost,
       status: "pending",
@@ -68,25 +68,6 @@ const ParcelBook = () => {
         <form onSubmit={handleSubmit(onSubmit)}>
           {/* register your input into the hook by invoking the "register" function */}
           <div className="grid grid-cols-1 place-items-center md:grid-cols-2">
-            {/* name */}
-            <div className="form-control">
-              <label className="label">
-                <span className="label-text">Name</span>
-              </label>
-              <input
-                {...register("name", { required: "Name is required" })}
-                type="text"
-                readOnly
-                value={user?.displayName}
-                placeholder="your Name"
-                className="input input-bordered focus:outline-red-600 border-red-600 focus:border-red-600 w-full max-w-xs"
-              />
-              {errors.name && (
-                <span className="text-error text-sm">
-                  {errors.name.message}
-                </span>
-              )}
-            </div>
             {/* email */}
             <div className="form-control">
               <label className="label">
@@ -176,9 +157,30 @@ const ParcelBook = () => {
                 placeholder="Receiver's Number"
                 className="input input-bordered focus:outline-red-600 border-red-600 focus:border-red-600 w-full max-w-xs"
               />
-              {errors.receiverNumber && (
+              {errors.number && (
                 <span className="text-error text-sm">
-                  {errors.receiverNumber.message}
+                  {errors.number.message}
+                </span>
+              )}
+            </div>
+            {/*collection amount*/}
+            <div className="form-control">
+              <label className="label">
+                <span className="label-text">
+                  Collection Amount From Customer
+                </span>
+              </label>
+              <input
+                {...register("collection", {
+                  required: "Collection Amount is required",
+                })}
+                type="number"
+                placeholder="Collection Amount"
+                className="input input-bordered focus:outline-red-600 border-red-600 focus:border-red-600 w-full max-w-xs"
+              />
+              {errors.collection && (
+                <span className="text-error text-sm">
+                  {errors.collection.message}
                 </span>
               )}
             </div>
@@ -195,9 +197,9 @@ const ParcelBook = () => {
                 placeholder="Parcel Delivery Address"
                 className="textarea textarea-bordered   focus:outline-red-600 border-red-600 focus:border-red-600  md:w-[280px]"
               />
-              {errors.delivery && (
+              {errors.address && (
                 <span className="text-error text-sm">
-                  {errors.delivery.message}
+                  {errors.address.message}
                 </span>
               )}
             </div>

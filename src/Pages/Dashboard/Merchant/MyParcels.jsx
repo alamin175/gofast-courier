@@ -1,17 +1,19 @@
 import { useQuery } from "@tanstack/react-query";
-import React from "react";
+import React, { useContext } from "react";
 import useAxiosSecure from "../../../Hooks/useAxiosSecure";
 import SectionTitle from "../../Shared/SectionTitle/SectionTitle";
 import { MdRateReview } from "react-icons/md";
 import { Link } from "react-router-dom";
 import { FaRegEdit } from "react-icons/fa";
+import { UserContext } from "../../../AuthContext/AuthContext";
 
 const MyParcels = () => {
+  const { user } = useContext(UserContext);
   const axiosSecure = useAxiosSecure();
-  const { data: parcels = [] } = useQuery({
+  const { data: parcels = [], refetch } = useQuery({
     queryKey: ["parcels"],
     queryFn: async () => {
-      const res = await axiosSecure.get("myParcels");
+      const res = await axiosSecure.get(`myParcels?email=${user.email}`);
       return res.data;
     },
   });
@@ -33,7 +35,7 @@ const MyParcels = () => {
               <th>Status</th>
               <th>Review</th>
               <th>Update</th>
-              <th>Pay</th>
+              <th>COD</th>
             </tr>
           </thead>
           <tbody>
@@ -81,9 +83,7 @@ const MyParcels = () => {
                       </button>
                     </Link>
                   </td>
-                  <td>
-                    <button className="btn btn-xs btn-accent">Pay</button>
-                  </td>
+                  <td>${parcel.collectionAmount}</td>
                 </tr>
               );
             })}
