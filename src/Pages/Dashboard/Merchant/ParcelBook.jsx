@@ -1,11 +1,13 @@
 import { useContext } from "react";
 import { useForm } from "react-hook-form";
-import { Link } from "react-router-dom";
+import Swal from "sweetalert2";
 import { UserContext } from "../../../AuthContext/AuthContext";
+import useAxiosSecure from "../../../Hooks/useAxiosSecure";
 import SectionTitle from "../../Shared/SectionTitle/SectionTitle";
 
 const ParcelBook = () => {
   const { user, error, setError } = useContext(UserContext);
+  const axiosSecure = useAxiosSecure();
 
   const {
     register,
@@ -16,7 +18,13 @@ const ParcelBook = () => {
   } = useForm();
 
   const weight = watch("weight");
-  const onSubmit = (value) => {
+
+  const currentDate = new Date();
+  const options = { day: "2-digit", month: "2-digit", year: "numeric" };
+  // set the locale to 'en-GB' (English - United Kingdom) because it uses the day/month/year format:
+  const formattedDate = currentDate.toLocaleDateString("en-GB", options);
+
+  const onSubmit = async (value) => {
     const {
       name,
       email,
@@ -37,7 +45,21 @@ const ParcelBook = () => {
       receiverNumber: number,
       receiverAddress: address,
       parcelCost: parcelCost,
+      status: "pending",
+      date: formattedDate,
     };
+    await axiosSecure.post("/booking", parcelDetails).then((res) => {
+      if (res.data.insertedId) {
+        reset();
+        Swal.fire({
+          position: "top-end",
+          icon: "success",
+          title: "Your Parcel Booking Successfullly",
+          showConfirmButton: false,
+          timer: 1500,
+        });
+      }
+    });
   };
   return (
     <div className="md:-mt-16 w-full">

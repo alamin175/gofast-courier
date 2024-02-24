@@ -9,6 +9,7 @@ import PrivateRoute from "./PrivateRoute";
 import ParcelBook from "../Pages/Dashboard/Merchant/ParcelBook";
 import MyParcels from "../Pages/Dashboard/Merchant/MyParcels";
 import MyProfile from "../Pages/Dashboard/Merchant/MyProfile";
+import UpdateParcel from "../Pages/Dashboard/Merchant/UpdateParcel";
 
 export const router = createBrowserRouter([
   {
@@ -48,6 +49,10 @@ export const router = createBrowserRouter([
       {
         path: "myProfile",
         element: <MyProfile></MyProfile>,
+      },
+      {
+        path: "updateParcel/:id",
+        element: <UpdateParcel></UpdateParcel>,
       },
     ],
   },

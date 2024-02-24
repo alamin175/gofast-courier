@@ -6,6 +6,7 @@ import App from "./App.jsx";
 import AuthContext from "./AuthContext/AuthContext.jsx";
 import "./index.css";
 import { router } from "./Routes/Routes.jsx";
+import { BrowserRouter } from "react-router-dom";
 
 const queryClient = new QueryClient();
 
@@ -14,9 +15,7 @@ ReactDOM.createRoot(document.getElementById("root")).render(
     <AuthContext>
       <QueryClientProvider client={queryClient}>
         <div className="mx-auto max-w-screen-xl">
-          <RouterProvider router={router}>
-            <App />
-          </RouterProvider>
+          <RouterProvider router={router}>{/* <App /> */}</RouterProvider>
         </div>
       </QueryClientProvider>
     </AuthContext>

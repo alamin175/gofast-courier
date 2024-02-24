@@ -4,16 +4,17 @@ import { useNavigate } from "react-router-dom";
 import { UserContext } from "../AuthContext/AuthContext";
 
 const axiosSecure = axios.create({
-  baseURL: "http://localhost:5173",
+  baseURL: "http://localhost:5000",
 });
 
 const useAxiosSecure = () => {
   const navigate = useNavigate();
-  const { logOut } = useContext(UserContext);
+  const { logOut, loading } = useContext(UserContext);
   axiosSecure.interceptors.request.use(
     (config) => {
       const token = localStorage.getItem("access-token");
       if (!token) {
+        loading(true);
         console.error("Access Token is missing. Redirecting to login");
         navigate("/login");
         return Promise.reject("Access Token is missing");

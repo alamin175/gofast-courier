@@ -11,7 +11,8 @@ import {
 } from "firebase/auth";
 import { app } from "../FirebaseConfig/firebase";
 import axios from "axios";
-import useAxiosSecure from "../Hooks/useAxiosSecure";
+
+import useAxiosPublic from "../Hooks/useAxiosPublic";
 
 export const UserContext = createContext(null);
 const auth = getAuth(app);
@@ -21,19 +22,22 @@ const AuthContext = ({ children }) => {
   const [error, setError] = useState(null);
   const [user, setUser] = useState(null);
   const [loading, setLoading] = useState(true);
-  // const axiosSecure = useAxiosSecure();
+
+  // TODO: axiossecure will implement after error solving
+
+  const axiosPublic = useAxiosPublic();
 
   useEffect(() => {
     const unsubscribe = onAuthStateChanged(auth, (currentUser) => {
       setUser(currentUser);
       // console.log(currentUser);
       if (currentUser) {
-        axios
-          .post("http://localhost:5000/jwt", {
+        axiosPublic
+          .post("jwt", {
             email: currentUser.email,
           })
           .then((res) => {
-            console.log(res);
+            // console.log(res);
             const token = res.data?.token;
 
             localStorage.setItem("access-token", token);
@@ -44,7 +48,9 @@ const AuthContext = ({ children }) => {
       }
       setLoading(false);
     });
-    return unsubscribe;
+    return () => {
+      return unsubscribe;
+    };
   }, []);
 
   const createUser = (email, password) => {
@@ -63,6 +69,7 @@ const AuthContext = ({ children }) => {
   };
 
   const updateUserProfile = (name, photo) => {
+    setLoading(true);
     return updateProfile(auth.currentUser, {
       displayName: name,
       photoURL: photo,
