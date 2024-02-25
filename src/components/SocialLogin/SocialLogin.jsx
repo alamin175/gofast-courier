@@ -47,6 +47,3 @@ const SocialLogin = () => {
 };
 
 export default SocialLogin;
-const handleGoogleSignIn = () => {
-  googleSignIn().then((data) => {});
-};

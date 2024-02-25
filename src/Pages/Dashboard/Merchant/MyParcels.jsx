@@ -74,14 +74,23 @@ const MyParcels = () => {
                     </button> */}
                   </td>
                   <td>
-                    <Link to={`/dashboard/updateParcel/${parcel._id}`}>
+                    {parcel.status === "pending" ? (
+                      <Link to={`/dashboard/updateParcel/${parcel._id}`}>
+                        <button
+                          title="Update Parcel"
+                          className="text-2xl p-1 text-black px-3 hover:bg-orange-300"
+                        >
+                          <FaRegEdit></FaRegEdit>
+                        </button>
+                      </Link>
+                    ) : (
                       <button
-                        title="Update Menu"
-                        className="text-2xl p-1 text-black px-3 hover:bg-orange-300"
+                        title="Update Parcel"
+                        className="text-2xl p-1 text-black px-3 hover:bg-orange-300 btn-disabled"
                       >
                         <FaRegEdit></FaRegEdit>
                       </button>
-                    </Link>
+                    )}
                   </td>
                   <td>${parcel.collectionAmount}</td>
                 </tr>

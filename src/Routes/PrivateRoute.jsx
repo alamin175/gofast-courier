@@ -6,7 +6,11 @@ const PrivateRoute = ({ children }) => {
   const { user, loading } = useContext(UserContext);
 
   if (loading) {
-    return "loading";
+    return (
+      <div className="flex justify-center items-center h-screen">
+        <span className="loading loading-dots loading-lg"></span>
+      </div>
+    );
   }
 
   if (user) {

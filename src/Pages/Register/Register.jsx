@@ -100,7 +100,13 @@ const Register = () => {
                   <span className="label-text">Name</span>
                 </label>
                 <input
-                  {...register("name", { required: "Name is required" })}
+                  {...register("name", {
+                    required: "Name is required",
+                    maxLength: {
+                      value: 23,
+                      message: "Name cannot be 23 or more",
+                    },
+                  })}
                   type="text"
                   placeholder="your Name"
                   className="input input-bordered focus:outline-red-600 border-red-600 focus:border-red-600 w-full max-w-xs"
