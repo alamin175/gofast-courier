@@ -35,19 +35,6 @@ const Login = () => {
       .catch((error) => setError(error.message));
   };
 
-  const handleGoogleSignIn = () => {
-    googleSignIn().then((data) => {
-      Swal.fire({
-        position: "top-end",
-        icon: "success",
-        title: "User login successfully",
-        showConfirmButton: false,
-        timer: 1500,
-      });
-      navigate("/");
-    });
-  };
-
   return (
     <form onSubmit={handleSubmit(onSubmit)}>
       <div className="hero bg-gradient-to-r from-white to-red-500 min-h-screen bg-base-200">

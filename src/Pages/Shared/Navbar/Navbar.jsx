@@ -1,10 +1,13 @@
 import { useContext } from "react";
+import { FaRegUser } from "react-icons/fa";
 import { IoIosNotifications } from "react-icons/io";
 import { Link } from "react-router-dom";
 import { UserContext } from "../../../AuthContext/AuthContext";
+import useUserData from "../../../Hooks/useUserData";
 
 const Navbar = () => {
   const { user, logOut } = useContext(UserContext);
+  const [userData, refetch] = useUserData();
 
   const handleLogout = () => {
     logOut().then(() => {
@@ -69,11 +72,12 @@ const Navbar = () => {
                   role="button"
                   className="btn btn-ghost btn-circle avatar"
                 >
-                  <div className="w-10 rounded-full">
-                    <img
-                      alt="Tailwind CSS Navbar component"
-                      src="https://daisyui.com/images/stock/photo-1534528741775-53994a69daeb.jpg"
-                    />
+                  <div className="w-10 ring-2 ring-[#ff0000] rounded-full">
+                    {userData.image ? (
+                      <img alt="User Avatar" src={userData.image} />
+                    ) : (
+                      <FaRegUser className="text-2xl mx-auto h-full"></FaRegUser>
+                    )}
                   </div>
                 </div>
 
