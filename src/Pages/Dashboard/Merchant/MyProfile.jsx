@@ -34,23 +34,25 @@ const MyProfile = () => {
     // const buttonName = event.nativeEvent.submitter.name;
 
     const imageFile = { image: data.image[0] };
+    console.log(imageFile);
 
     const res = await axiosPublic.post(imageUpload, imageFile, {
       headers: {
         "content-type": "multipart/form-data",
       },
     });
-    if (res.data.success) {
+
+    if (res?.data.success) {
       const updateData = {
         name: data.name,
-        image: res.data.data.display_url,
+        image: res?.data.data.display_url,
       };
 
       const updateProfile = await axiosSecure.patch(
         `/updateProfile?email=${user?.email}`,
         updateData
       );
-      console.log(updateProfile.data);
+      // console.log(updateProfile.data);
       if (updateProfile.data.modifiedCount === 1) {
         Swal.fire({
           position: "top-end",
@@ -64,11 +66,11 @@ const MyProfile = () => {
       }
     }
 
-    console.log(res);
+    // console.log(res);
   };
 
   return (
-    <div className="md:-mt-16  w-full">
+    <div className="md:-mt-16  w-full mb-10">
       <SectionTitle title="Your Profile"></SectionTitle>
       <div className=" items-center gap-4 border  shadow-lg shadow-red-500 border-[#ff0000] mx-auto p-10 w-1/2">
         <div className="avatar flex justify-center items-center m-3">
@@ -95,7 +97,7 @@ const MyProfile = () => {
                 </span>
               </div>
               <input
-                {...register("image", { required: "No image Selected" })}
+                {...register("image", { required: "No image selected" })}
                 type="file"
                 className="file-input file-input-bordered w-full max-w-xs"
               />

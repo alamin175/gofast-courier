@@ -1,7 +1,5 @@
-import { useQuery } from "@tanstack/react-query";
 import { useContext } from "react";
-import { set, useForm } from "react-hook-form";
-import { FcGoogle } from "react-icons/fc";
+import { useForm } from "react-hook-form";
 import { Link, useNavigate } from "react-router-dom";
 import Swal from "sweetalert2";
 import { UserContext } from "../../AuthContext/AuthContext";

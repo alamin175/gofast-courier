@@ -1,11 +1,16 @@
 import { NavLink, Outlet } from "react-router-dom";
+import useAdmin from "../Hooks/useAdmin";
 // import "./dashboard.css";
 
 const Dashboard = () => {
   // TODO: user type will be update
+  const [isAdmin] = useAdmin();
+  // console.log(isAdmin);
+
+  // TODO
   const merchant = true;
   const deliveryMan = false;
-  const admin = false;
+
   return (
     <div className="drawer lg:drawer-open">
       <input id="my-drawer" type="checkbox" className="drawer-toggle" />
@@ -29,23 +34,35 @@ const Dashboard = () => {
         ></label>
         <ul className="menu p-4 w-80 min-h-full bg-red-300 text-base-content ">
           {/* Sidebar content here */}
-          {admin ? (
-            <>
+          {isAdmin ? (
+            <div className="text-2xl">
               <li>
-                <NavLink>
+                <NavLink to="/dashboard/allParcels">
+                  <a>All Parcels</a>
+                </NavLink>
+              </li>
+              <li>
+                <NavLink to="/dashboard/allUsers">
                   <a>All Users</a>
                 </NavLink>
               </li>
-            </>
-          ) : deliveryMan ? (
-            <>
               <li>
-                <NavLink>
-                  <a>My Delivery</a>
+                <NavLink to="/dashboard/allDeliveryMan">
+                  <a>All Delivery Man</a>
                 </NavLink>
               </li>
-            </>
-          ) : (
+              <li>
+                <NavLink to="/dashboard/myProfile">
+                  <a>My Profile</a>
+                </NavLink>
+              </li>
+              <li>
+                <NavLink to="/">
+                  <a>Home</a>
+                </NavLink>
+              </li>
+            </div>
+          ) : merchant ? (
             <div className="text-2xl">
               <li>
                 <NavLink
@@ -77,6 +94,14 @@ const Dashboard = () => {
                 </NavLink>
               </li>
             </div>
+          ) : (
+            <>
+              <li>
+                <NavLink>
+                  <a>My Delivery</a>
+                </NavLink>
+              </li>
+            </>
           )}
         </ul>
       </div>

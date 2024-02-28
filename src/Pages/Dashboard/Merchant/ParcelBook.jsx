@@ -14,15 +14,35 @@ const ParcelBook = () => {
     handleSubmit,
     reset,
     watch,
+    setValue,
     formState: { errors },
   } = useForm();
 
-  const weight = watch("weight");
+  // const parcelCost = watch("parcelCost");
+  // console.log(parcelCost);
 
   const currentDate = new Date();
   const options = { day: "2-digit", month: "2-digit", year: "numeric" };
   // set the locale to 'en-GB' (English - United Kingdom) because it uses the day/month/year format:
   const formattedDate = currentDate.toLocaleDateString("en-GB", options);
+
+  const weightValue =
+    watch("weight"); /* watch from react-hook-form return a string*/
+  const calculateParcelCost = (weight) => {
+    const numWeight = parseInt(weight);
+    if (numWeight == null || numWeight <= 0) {
+      return 0;
+    } else if (numWeight === 1) {
+      return 50;
+    } else if (numWeight === 2) {
+      return 100;
+    } else if (numWeight >= 3) {
+      return 150;
+    } else {
+      return 0;
+    }
+    // return 0;
+  };
 
   const onSubmit = async (value) => {
     const {
@@ -36,7 +56,11 @@ const ParcelBook = () => {
       parcelCost,
     } = value;
     console.log(value);
+
+    const parcelCosting = calculateParcelCost(weight);
+    setValue("parcelCost", parcelCosting);
     const parcelDetails = {
+      name: user?.displayName,
       email: email,
       parcelType: parcelType,
       parcelWeight: weight,
@@ -44,7 +68,7 @@ const ParcelBook = () => {
       receiverNumber: number,
       collectionAmount: collection,
       receiverAddress: address,
-      parcelCost: parcelCost,
+      parcelCost: parcelCosting,
       status: "pending",
       date: formattedDate,
     };
@@ -62,7 +86,7 @@ const ParcelBook = () => {
     });
   };
   return (
-    <div className="md:-mt-16 w-full">
+    <div className="md:-mt-16 w-full mb-10">
       <SectionTitle title="Book A Percel"></SectionTitle>
       <div className="bg-base-200 lg:p-10 p-4 shadow-md shadow-red-700 lg:mx-10">
         <form onSubmit={handleSubmit(onSubmit)}>
@@ -210,17 +234,8 @@ const ParcelBook = () => {
               </label>
               <input
                 {...register("parcelCost", { required: "Name is required" })}
-                type="text"
-                readOnly
-                value={
-                  weight == null || weight == 0
-                    ? 0
-                    : weight == 1
-                    ? 50
-                    : weight == 2
-                    ? 100
-                    : 150
-                }
+                type="number"
+                value={calculateParcelCost(weightValue)}
                 placeholder="your Name"
                 className="input input-bordered focus:outline-red-600 border-red-600 focus:border-red-600 w-full max-w-xs"
               />

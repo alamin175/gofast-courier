@@ -19,21 +19,21 @@ const MyParcels = () => {
   });
   // console.log(parcels);
   return (
-    <div className="md:-mt-16 w-full">
+    <div className="md:-mt-16 w-full mb-10">
       <SectionTitle title="My Parcels"></SectionTitle>
-      <div className="overflow-x-auto mx-auto mr-1 ml-1">
-        <table className="table table-xs md:table-xs">
+      <div className="overflow-x-auto -mt-6 mx-auto ml-1 mr-1">
+        <table className="table table-xs">
           <thead>
             <tr>
               <th>#</th>
-              <th>Customer's Name</th>
+              <th>Name</th>
               <th>Parcel Type</th>
               <th>Customer's Number</th>
               <th>Delivery Address</th>
               <th>Delivery man's Id</th>
               <th>Booking Date</th>
               <th>Status</th>
-              <th>Review</th>
+              {/* <th>Review</th> */}
               <th>Update</th>
               <th>COD</th>
             </tr>
@@ -42,12 +42,15 @@ const MyParcels = () => {
             {parcels.map((parcel, index) => {
               return (
                 <tr style={{ fontSize: 14 }} key={parcel._id}>
+                  {console.log(parcel)}
                   <td className="text-lg">{index + 1}</td>
                   <td>{parcel.receiverName}</td>
                   <td>{parcel.parcelType}</td>
                   <td>{parcel.receiverNumber}</td>
                   <td>{parcel.receiverAddress}</td>
-                  <td>Assign Later</td>
+                  <td>
+                    {parcel.riderId ? parcel.riderId : "Rider not assigned"}
+                  </td>
                   <td>{parcel.date}</td>
                   <td
                     className={
@@ -58,7 +61,7 @@ const MyParcels = () => {
                   >
                     {parcel.status}
                   </td>
-                  <td>
+                  {/* <td>
                     <button
                       className={`btn btn-xs btn-primary ${
                         parcel.status === "delivered"
@@ -68,11 +71,7 @@ const MyParcels = () => {
                     >
                       <MdRateReview className="text-white text-lg"></MdRateReview>
                     </button>
-
-                    {/* <button className="btn btn-">
-                      <MdRateReview></MdRateReview>
-                    </button> */}
-                  </td>
+                  </td> */}
                   <td>
                     {parcel.status === "pending" ? (
                       <Link to={`/dashboard/updateParcel/${parcel._id}`}>
