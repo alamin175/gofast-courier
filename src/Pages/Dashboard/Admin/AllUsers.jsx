@@ -15,13 +15,13 @@ const AllUsers = () => {
   });
 
   return (
-    <div className="md:-mt-16 mb-10">
+    <div className="-mt-16 mb-10">
       <SectionTitle title="All User's"> </SectionTitle>
-      <div className="overflow-x-auto -mt-5">
+      <div className="overflow-x-auto -mt-5 w-11/12 mx-auto">
         <table className="table table-zebra">
           {/* head */}
           <thead>
-            <tr className="text-lg">
+            <tr className="md:text-lg">
               <th>#</th>
               <th>Name</th>
               <th>Email</th>

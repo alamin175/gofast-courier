@@ -70,9 +70,9 @@ const MyProfile = () => {
   };
 
   return (
-    <div className="md:-mt-16  w-full mb-10">
+    <div className="-mt-16  w-full mb-10">
       <SectionTitle title="Your Profile"></SectionTitle>
-      <div className=" items-center gap-4 border  shadow-lg shadow-red-500 border-[#ff0000] mx-auto p-10 w-1/2">
+      <div className=" items-center gap-4 border  shadow-lg shadow-red-500 border-[#ff0000] mx-auto p-10 w-11/12 md:w-1/2">
         <div className="avatar flex justify-center items-center m-3">
           <div className="w-36 h-36 rounded-full ring ring-primary ring-offset-base-100 ring-offset-2 overflow-hidden">
             {userData.image ? (
@@ -156,7 +156,7 @@ const MyProfile = () => {
         </div> */}
           <div className=" justify-center items-center gap-2">
             {/* <form onSubmit={handleUpdateProfile}> */}
-            <table className="text-xl font-medium">
+            <table className="text-xl md:font-medium">
               <tbody>
                 <tr>
                   <td>Name</td>

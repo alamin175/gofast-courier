@@ -19,7 +19,7 @@ const MyParcels = () => {
   });
   // console.log(parcels);
   return (
-    <div className="md:-mt-16 w-full mb-10">
+    <div className="-mt-16 w-full mb-10">
       <SectionTitle title="My Parcels"></SectionTitle>
       <div className="overflow-x-auto -mt-6 mx-auto ml-1 mr-1">
         <table className="table table-xs">

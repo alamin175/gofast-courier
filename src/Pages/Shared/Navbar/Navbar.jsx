@@ -17,11 +17,11 @@ const Navbar = () => {
   const navOption = (
     <>
       <Link to="/">
-        <li className="mr-5">Home</li>
+        <li className="mr-5 text-lg">Home</li>
       </Link>
 
       <Link to="/dashboard/myProfile">
-        <li>Dashboard</li>
+        <li className="text-lg">Dashboard</li>
       </Link>
     </>
   );

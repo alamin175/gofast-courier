@@ -75,10 +75,10 @@ const AllParcels = () => {
   };
 
   return (
-    <div className="md:-mt-16 mb-10">
+    <div className="-mt-16 mb-10">
       <SectionTitle title="All Parcels"> </SectionTitle>
 
-      <div className="overflow-x-auto">
+      <div className="overflow-x-auto w-11/12 mx-auto">
         <table className="table">
           {/* head */}
           <thead>

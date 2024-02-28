@@ -81,9 +81,9 @@ const UpdateParcel = () => {
     }
   };
   return (
-    <div className="md:-mt-16 w-full mb-10">
+    <div className="-mt-16 w-full mb-10">
       <SectionTitle title="Update Your Parcel"></SectionTitle>
-      <div className="bg-base-200 lg:p-10 p-4 shadow-md shadow-red-700 lg:mx-10">
+      <div className="bg-base-200 lg:p-10 p-4 shadow-md w-11/12 mx-auto shadow-red-700 lg:mx-10">
         <form onSubmit={handleSubmit(onSubmit)}>
           {/* register your input into the hook by invoking the "register" function */}
           <div className="grid grid-cols-1 place-items-center md:grid-cols-2">
