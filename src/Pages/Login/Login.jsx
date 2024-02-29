@@ -1,4 +1,4 @@
-import { useContext } from "react";
+import { useContext, useRef } from "react";
 import { useForm } from "react-hook-form";
 import { FcGoogle } from "react-icons/fc";
 import { Link, useNavigate } from "react-router-dom";
@@ -7,7 +7,10 @@ import { UserContext } from "../../AuthContext/AuthContext";
 import SocialLogin from "../../components/SocialLogin/SocialLogin";
 
 const Login = () => {
-  const { signInUser, error, setError, googleSignIn } = useContext(UserContext);
+  const { user, signInUser, error, setError, resetPassword } =
+    useContext(UserContext);
+  const emailRef = useRef();
+
   const navigate = useNavigate();
 
   const {
@@ -33,6 +36,20 @@ const Login = () => {
         navigate("/");
       })
       .catch((error) => setError(error.message));
+  };
+
+  const forgetPassword = () => {
+    const email = emailRef.current.value;
+    if (!email) {
+      return;
+    }
+    resetPassword(email)
+      .then((data) => {
+        alert("Please check your email for reset password");
+        const modal = document.getElementById("my_modal_1");
+        modal.close();
+      })
+      .catch((error) => console.log(error.message));
   };
 
   return (
@@ -84,9 +101,41 @@ const Login = () => {
                   </span>
                 )}
                 <label className="label">
-                  <a href="#" className="label-text-alttext-lg link link-hover">
+                  <a
+                    onClick={() =>
+                      document.getElementById("my_modal_1").showModal()
+                    }
+                    href="#"
+                    className="label-text-alttext-lg link link-hover"
+                  >
                     Forgot password?
                   </a>
+                  <dialog id="my_modal_1" className="modal">
+                    <div className="modal-box">
+                      <h3 className="font-bold text-lg">Type your email!</h3>
+                      <p className="py-4">
+                        <input
+                          required
+                          ref={emailRef}
+                          type="text"
+                          placeholder="Email"
+                          className="input input-bordered w-full max-w-xs"
+                        />
+                      </p>
+                      <input
+                        onClick={forgetPassword}
+                        className="btn hover:bg-red-600 bg-red-500 text-white font-bold text-xl"
+                        type="submit"
+                        value="Submit"
+                      />
+                      <div className="modal-action">
+                        <form method="dialog">
+                          {/* if there is a button in form, it will close the modal */}
+                          <button className="btn">Close</button>
+                        </form>
+                      </div>
+                    </div>
+                  </dialog>
                 </label>
               </div>
 
