@@ -1,4 +1,5 @@
 import { useContext } from "react";
+import { Helmet } from "react-helmet";
 import { useForm } from "react-hook-form";
 import { Link, useNavigate } from "react-router-dom";
 import Swal from "sweetalert2";
@@ -59,6 +60,9 @@ const Register = () => {
 
   return (
     <form onSubmit={handleSubmit(onSubmit)}>
+      <Helmet>
+        <title>Register - GoFast</title>
+      </Helmet>
       <div className="hero bg-gradient-to-r from-red-500 to-white min-h-screen bg-base-200">
         <div className="hero-content flex-col lg:mx-16 lg:flex-row-reverse">
           <div className="text-center lg:text-left">

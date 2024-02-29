@@ -6,6 +6,7 @@ import { MdRateReview } from "react-icons/md";
 import { Link } from "react-router-dom";
 import { FaRegEdit } from "react-icons/fa";
 import { UserContext } from "../../../AuthContext/AuthContext";
+import { Helmet } from "react-helmet";
 
 const MyParcels = () => {
   const { user } = useContext(UserContext);
@@ -20,6 +21,9 @@ const MyParcels = () => {
   // console.log(parcels);
   return (
     <div className="-mt-16 w-full mb-10">
+      <Helmet>
+        <title>My Parcels - GoFast</title>
+      </Helmet>
       <SectionTitle title="My Parcels"></SectionTitle>
       <div className="overflow-x-auto -mt-6 mx-auto ml-1 mr-1">
         <table className="table table-xs">

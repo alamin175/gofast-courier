@@ -3,6 +3,7 @@ import React from "react";
 import useAxiosSecure from "../../../Hooks/useAxiosSecure";
 import SectionTitle from "../../Shared/SectionTitle/SectionTitle";
 import { FcRating } from "react-icons/fc";
+import { Helmet } from "react-helmet";
 
 const AllDeliveryMan = () => {
   const axiosSecure = useAxiosSecure();
@@ -17,6 +18,9 @@ const AllDeliveryMan = () => {
 
   return (
     <div className="-mt-16 mb-10 ">
+      <Helmet>
+        <title>All Delivery Man- GoFast</title>
+      </Helmet>
       <SectionTitle title="All Delivery Man"> </SectionTitle>
       <div className="overflow-x-auto w-11/12 mx-auto">
         <table className="table">

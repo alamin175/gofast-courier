@@ -1,5 +1,6 @@
 import { useQuery } from "@tanstack/react-query";
 import React, { useContext } from "react";
+import { Helmet } from "react-helmet";
 import { useForm } from "react-hook-form";
 import { useNavigate, useParams } from "react-router-dom";
 import Swal from "sweetalert2";
@@ -82,6 +83,9 @@ const UpdateParcel = () => {
   };
   return (
     <div className="-mt-16 w-full mb-10">
+      <Helmet>
+        <title>Update Parcel - GoFast</title>
+      </Helmet>
       <SectionTitle title="Update Your Parcel"></SectionTitle>
       <div className="bg-base-200 lg:p-10 p-4 shadow-md w-11/12 mx-auto shadow-red-700 lg:mx-10">
         <form onSubmit={handleSubmit(onSubmit)}>

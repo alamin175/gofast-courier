@@ -1,5 +1,6 @@
 import { useQuery } from "@tanstack/react-query";
 import { useContext } from "react";
+import { Helmet } from "react-helmet";
 import { useForm } from "react-hook-form";
 import { FaRegEdit, FaRegUser, FaRegUserCircle } from "react-icons/fa";
 import Swal from "sweetalert2";
@@ -71,6 +72,9 @@ const MyProfile = () => {
 
   return (
     <div className="-mt-16  w-full mb-10">
+      <Helmet>
+        <title>My Profile - GoFast</title>
+      </Helmet>
       <SectionTitle title="Your Profile"></SectionTitle>
       <div className=" items-center gap-4 border  shadow-lg shadow-red-500 border-[#ff0000] mx-auto p-10 w-11/12 md:w-1/2">
         <div className="avatar flex justify-center items-center m-3">

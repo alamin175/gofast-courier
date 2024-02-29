@@ -1,5 +1,6 @@
 import { useQuery } from "@tanstack/react-query";
 import React from "react";
+import { Helmet } from "react-helmet";
 import useAxiosSecure from "../../../Hooks/useAxiosSecure";
 import SectionTitle from "../../Shared/SectionTitle/SectionTitle";
 
@@ -16,6 +17,9 @@ const AllUsers = () => {
 
   return (
     <div className="-mt-16 mb-10">
+      <Helmet>
+        <title>All Users - GoFast</title>
+      </Helmet>
       <SectionTitle title="All User's"> </SectionTitle>
       <div className="overflow-x-auto -mt-5 w-11/12 mx-auto">
         <table className="table table-zebra">
@@ -35,7 +39,13 @@ const AllUsers = () => {
                 <th>{index + 1}</th>
                 <td>{user.name}</td>
                 <td>{user.email}</td>
-                <td className="uppercase">{user.role}</td>
+                <td
+                  className={`uppercase ${
+                    user.role === "admin" ? "text-green-500" : ""
+                  }`}
+                >
+                  {user.role}
+                </td>
               </tr>
             ))}
           </tbody>

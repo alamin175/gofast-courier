@@ -8,6 +8,7 @@ import { MdOutlineManageAccounts } from "react-icons/md";
 import { useForm } from "react-hook-form";
 import Swal from "sweetalert2";
 import { useNavigate } from "react-router-dom";
+import { Helmet } from "react-helmet";
 
 const AllParcels = () => {
   const axiosSecure = useAxiosSecure();
@@ -76,6 +77,9 @@ const AllParcels = () => {
 
   return (
     <div className="-mt-16 mb-10">
+      <Helmet>
+        <title>All Parcels - GoFast</title>
+      </Helmet>
       <SectionTitle title="All Parcels"> </SectionTitle>
 
       <div className="overflow-x-auto w-11/12 mx-auto">

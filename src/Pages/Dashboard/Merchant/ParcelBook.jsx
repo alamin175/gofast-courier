@@ -1,5 +1,7 @@
 import { useContext } from "react";
+import { Helmet } from "react-helmet";
 import { useForm } from "react-hook-form";
+import { useNavigate } from "react-router-dom";
 import Swal from "sweetalert2";
 import { UserContext } from "../../../AuthContext/AuthContext";
 import useAxiosSecure from "../../../Hooks/useAxiosSecure";
@@ -8,6 +10,7 @@ import SectionTitle from "../../Shared/SectionTitle/SectionTitle";
 const ParcelBook = () => {
   const { user, error, setError } = useContext(UserContext);
   const axiosSecure = useAxiosSecure();
+  const navigate = useNavigate();
 
   const {
     register,
@@ -82,11 +85,15 @@ const ParcelBook = () => {
           showConfirmButton: false,
           timer: 1500,
         });
+        navigate("/dashboard/myParcels");
       }
     });
   };
   return (
     <div className="-mt-16 w-full mb-10">
+      <Helmet>
+        <title>Parcel Booking - GoFast</title>
+      </Helmet>
       <SectionTitle title="Book A Percel"></SectionTitle>
       <div className="bg-base-200 lg:p-10 p-4 shadow-md shadow-red-700 w-11/12 mx-auto lg:mx-10">
         <form onSubmit={handleSubmit(onSubmit)}>
