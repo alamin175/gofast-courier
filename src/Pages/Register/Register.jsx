@@ -81,11 +81,11 @@ const Register = () => {
                   <span className="label-text text-2xl">Register As</span>
                 </label>
                 <select
-                  defaultValue="default"
+                  defaultValue=""
                   {...register("role", { required: "Role is required" })}
                   className="select focus:outline-red-600 border-red-600 focus:border-red-600 w-full max-w-xs"
                 >
-                  <option value="default" disabled>
+                  <option value="" disabled>
                     Select A Role
                   </option>
                   <option value="merchant"> Merchant</option>

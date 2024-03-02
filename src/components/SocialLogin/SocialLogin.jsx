@@ -1,6 +1,6 @@
 import { useContext } from "react";
 import { FcGoogle } from "react-icons/fc";
-import { useNavigate } from "react-router-dom";
+import { useLocation, useNavigate } from "react-router-dom";
 import Swal from "sweetalert2";
 import { UserContext } from "../../AuthContext/AuthContext";
 import useAxiosPublic from "../../Hooks/useAxiosPublic";
@@ -8,7 +8,9 @@ import useAxiosPublic from "../../Hooks/useAxiosPublic";
 const SocialLogin = () => {
   const { googleSignIn } = useContext(UserContext);
   const axiosPublic = useAxiosPublic();
+  const location = useLocation();
   const navigate = useNavigate();
+  const from = location.state?.from?.pathname;
   const handleGoogleSignIn = () => {
     googleSignIn().then(async (result) => {
       // console.log(result);

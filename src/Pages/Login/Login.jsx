@@ -2,7 +2,7 @@ import { useContext, useRef } from "react";
 import { Helmet } from "react-helmet";
 import { useForm } from "react-hook-form";
 import { FcGoogle } from "react-icons/fc";
-import { Link, useNavigate } from "react-router-dom";
+import { Link, useLocation, useNavigate } from "react-router-dom";
 import Swal from "sweetalert2";
 import { UserContext } from "../../AuthContext/AuthContext";
 import SocialLogin from "../../components/SocialLogin/SocialLogin";
@@ -11,6 +11,9 @@ const Login = () => {
   const { user, signInUser, error, setError, resetPassword } =
     useContext(UserContext);
   const emailRef = useRef();
+  const location = useLocation();
+  console.log(location);
+  const from = location.state?.from?.pathname;
 
   const navigate = useNavigate();
 
@@ -33,7 +36,7 @@ const Login = () => {
           showConfirmButton: false,
           timer: 1500,
         });
-        navigate("/");
+        navigate(from, { replace: true });
       })
       .catch((error) => setError(error.message));
   };
@@ -128,7 +131,7 @@ const Login = () => {
 
                 <label className="label">
                   <p className="label-text-alt text-lg ">
-                    Dont have an account?{" "}
+                    Don't have an account?
                     <Link to="/register" className="text-[#ff0000]  link-hover">
                       Register
                     </Link>
