@@ -1,4 +1,5 @@
 import CountUp from "react-countup";
+import "animate.css";
 import SectionTitle from "../../Shared/SectionTitle/SectionTitle";
 const Feature = () => {
   return (
@@ -14,7 +15,7 @@ const Feature = () => {
             Our Special Feature
           </h1>
         </div>
-        <div className="grid md:mx-16 lg:mx-0 m-2 gap-y-5 md:gap-y-10  place-items-center lg:grid-cols-3">
+        <div className="  grid md:mx-16 lg:mx-0 m-2 gap-y-5 md:gap-y-10  place-items-center lg:grid-cols-3">
           <div className="card  lg:w-96 bg-base-100 shadow-xl">
             <figure>
               <img src="https://i.ibb.co/F7St9Nb/image.png" alt="Image" />
